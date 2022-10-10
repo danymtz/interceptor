@@ -13,7 +13,12 @@ export class DataService {
   constructor() { 
     this.localStorage$ = this.session$.pipe(
       tap ((session) => {
-        localStorage.setItem('session',JSON.stringify(session))
+
+        if (session){
+          console.log(localStorage.setItem('session',JSON.stringify(session)));
+          localStorage.setItem('session',JSON.stringify(session))
+        }
+        
       })
     )
     this.localStorage$.subscribe();

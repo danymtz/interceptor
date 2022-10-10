@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -13,7 +13,15 @@ export class SecondComponent implements OnInit {
   public pokemonName = "";
 
   constructor(private api: ApiService) {
-    //this.pokemon$ = api.searchPokemom('ditto')
+    /* this.api.searchPokemom('charmander').subscribe(
+      {next: value => {
+        console.log(value);
+        
+      }}
+    ) */
+    this.pokemon$ = this.api.searchPokemom(this.pokemonName).pipe(
+      tap(console.log)
+    )
    }
 
   ngOnInit(): void {
@@ -21,7 +29,9 @@ export class SecondComponent implements OnInit {
 
   onChange(){
     console.log(this.pokemonName);
-    this.pokemon$ = this.api.searchPokemom(this.pokemonName)
+    this.pokemon$ = this.api.searchPokemom(this.pokemonName).pipe(
+      tap(console.log)
+    )
   }
 
 }

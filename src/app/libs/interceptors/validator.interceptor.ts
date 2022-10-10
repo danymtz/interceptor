@@ -13,7 +13,7 @@ export class ValidatorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(request);
+    //console.log(request);
 
     let name: string = request.url.split("/").pop()!;
 
