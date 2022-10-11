@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class SecondComponent implements OnInit {
 
   public pokemon$!: Observable<any>;
-  public pokemonName = "";
+  public pokemonName = "pikachu";
 
   constructor(private api: ApiService) {
     /* this.api.searchPokemom('charmander').subscribe(

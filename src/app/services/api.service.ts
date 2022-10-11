@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import StorageHelper from '../libs/helpers/storage.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +33,15 @@ export class ApiService {
     }) */
   }
 
-  getSession (option: string){
+  /* getSession (option: string){
     let session = JSON.parse(localStorage.getItem("session")!)
     if (option === 'username'){
       return session.username;
     }
     return session.token;
-  }
+  } */
 
-  checkStatus (): Observable<any>{
+  /* checkStatus (): Observable<any>{
     console.log(this.getSession('token'));
     
     return this.httpClient.get('http://ec2-18-116-97-69.us-east-2.compute.amazonaws.com:4001/api/check',{
@@ -48,11 +49,11 @@ export class ApiService {
         Authorization: "Bearer " + this.getSession('token')
       }
     })
-  }
+  } */
 
   refreshToken() {
     return this.httpClient.post('http://ec2-18-116-97-69.us-east-2.compute.amazonaws.com:4001/api/refresh',{
-      user: this.getSession('username')
+      session: StorageHelper.getItem('session')
     })
   }
 }

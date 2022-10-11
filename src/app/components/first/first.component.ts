@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import StorageHelper from 'src/app/libs/helpers/storage.helper';
 import { ApiService } from 'src/app/services/api.service';
 import { DataService } from 'src/app/services/data.service';
 
@@ -21,10 +22,7 @@ export class FirstComponent implements OnInit {
   onClick() {
     this.api.login(this.username, this.password).subscribe({
       next:(resp) =>{
-        this.dataService.session$.next({
-          username: this.username,
-          token: resp.token
-        })
+        StorageHelper.setItem('session',resp)
         this.router.navigate(['search'])
       } 
     })
